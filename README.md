@@ -75,6 +75,7 @@ Open Terminal and Install via Homebrew:
 Install Homebrew if you don't have it: https://brew.sh
 
 brew install kubectl kind git
+
 brew install --cask docker
 
 Then launch Docker Desktop from Applications and wait until it's "running"
@@ -82,8 +83,11 @@ Then launch Docker Desktop from Applications and wait until it's "running"
 Verify tools:
 
 kubectl version --client
+
 kind version
+
 git --version
+
 docker version
 
 * The image (`nginx:alpine`) and KIND node images are **multi-arch**; no extra flags needed on Apple Silicon.
@@ -104,6 +108,7 @@ kind create cluster --name kind-2048 --config kind/kind-cluster.yaml
 4) Install NGINX Ingress
 
 kubectl apply -f https://kind.sigs.k8s.io/examples/ingress/deploy-ingress-nginx.yaml
+
 kubectl wait -n ingress-nginx \
   --for=condition=ready pod \
   -l app.kubernetes.io/component=controller \
@@ -123,6 +128,7 @@ kubectl apply -f k8s/ingress.yaml
 7) Map 2048.local to localhost
 
 sudo cp /etc/hosts /etc/hosts.bak
+
 grep -q '2048\.local' /etc/hosts || echo '127.0.0.1 2048.local' | sudo tee -a /etc/hosts >/dev/null
 
 8) Open the game
@@ -138,7 +144,10 @@ docker start kind-2048-control-plane
 # If image pull issues occur (rare), reload and restart:
 
 docker build -t 2048:1.0 .
+
 kind load docker-image 2048:1.0 --name kind-2048
+
 kubectl -n game-2048 rollout restart deploy/game-2048
+
 
 
