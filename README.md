@@ -1,6 +1,6 @@
-##For Windows 11
+# For Windows 11
 
-#Prerequisites
+# Prerequisites
 
 * Win 11/10
 * Docker Desktop (WSL 2 backend)
@@ -77,8 +77,7 @@ Install Homebrew if you don't have it: https://brew.sh
 brew install kubectl kind git
 brew install --cask docker
 
-# Then launch Docker Desktop from Applications and wait until it's "running"
-
+Then launch Docker Desktop from Applications and wait until it's "running"
 
 Verify tools:
 
@@ -130,16 +129,14 @@ grep -q '2048\.local' /etc/hosts || echo '127.0.0.1 2048.local' | sudo tee -a /e
 
 * Open http://2048.local/ on browser: **[http://2048.local/](http://2048.local/)**
 
-Everyday use (after reboot / Docker stopped)
+# Everyday use (after reboot / Docker stopped)
 
-# Start the KIND control-plane container if it’s stopped
+Start the KIND control-plane container if it’s stopped
+
 docker start kind-2048-control-plane
 
-# Check that pods are running
-kubectl -n game-2048 get pods
-
 # If image pull issues occur (rare), reload and restart:
-# docker build -t 2048:1.0 .
-# kind load docker-image 2048:1.0 --name kind-2048
-# kubectl -n game-2048 rollout restart deploy/game-2048
 
+docker build -t 2048:1.0 .
+kind load docker-image 2048:1.0 --name kind-2048
+kubectl -n game-2048 rollout restart deploy/game-2048
