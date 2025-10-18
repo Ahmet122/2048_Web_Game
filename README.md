@@ -131,10 +131,7 @@ kind create cluster --name kind-2048 --config kind/kind-cluster.yaml
 
 kubectl apply -f https://kind.sigs.k8s.io/examples/ingress/deploy-ingress-nginx.yaml
 
-kubectl wait -n ingress-nginx \
-  --for=condition=ready pod \
-  -l app.kubernetes.io/component=controller \
-  --timeout=90s
+kubectl wait -n ingress-nginx --for=condition=ready pod -l app.kubernetes.io/component=controller --timeout=90s
 
 
 5) Load your local image into KIND
@@ -162,7 +159,7 @@ grep -q '2048\.local' /etc/hosts || echo '127.0.0.1 2048.local' | sudo tee -a /e
 
 8) Open the game
 
-* Open http://2048.local/ on browser: **[http://2048.local/](http://2048.local/)**
+* Open http://2048.local/ on browser
 
 # Everyday use (after reboot / Docker stopped)
 
@@ -177,6 +174,7 @@ docker build -t 2048:1.0 .
 kind load docker-image 2048:1.0 --name kind-2048
 
 kubectl -n game-2048 rollout restart deploy/game-2048
+
 
 
 
