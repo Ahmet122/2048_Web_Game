@@ -11,8 +11,11 @@
 You can install with winget:
 
 winget install -e --id Docker.DockerDesktop
+
 winget install -e --id Kubernetes.kubectl
+
 winget install -e --id Kubernetes.kind
+
 winget install -e --id Git.Git
 
 1) Clone the repository
@@ -30,6 +33,7 @@ kind create cluster --name kind-2048 --config kind\kind-cluster.yaml
 4) Install NGINX Ingress (for HTTP routing)
 
 kubectl apply -f https://kind.sigs.k8s.io/examples/ingress/deploy-ingress-nginx.yaml
+
 kubectl wait -n ingress-nginx --for=condition=ready pod -l app.kubernetes.io/component=controller --timeout=90s
 
 5) Load the local image into KIND
@@ -39,8 +43,11 @@ kind load docker-image 2048:1.0 --name kind-2048
 6) Apply Kubernetes yaml files
 
 kubectl apply -f k8s/namespace.yaml
+
 kubectl apply -f k8s/deployment.yaml
+
 kubectl apply -f k8s/service.yaml
+
 kubectl apply -f k8s/ingress.yaml
 
 7) Map 2048.local to localhost (run as Administrator)
@@ -53,9 +60,10 @@ Add-Content -Path "$env:WINDIR\System32\drivers\etc\hosts" -Value "`n127.0.0.1 2
 
 ## Everyday use (quick start next time)
 
-If Docker/KIND was stopped or after reboot:
+* If Docker/KIND was stopped or after reboot:
 
 docker start kind-2048-control-plane
+
 kubectl -n game-2048 get pods
 
 -----------------------------------------------------------------------------
@@ -121,8 +129,11 @@ kind load docker-image 2048:1.0 --name kind-2048
 6) Apply Kubernetes yaml files
 
 kubectl apply -f k8s/namespace.yaml
+
 kubectl apply -f k8s/deployment.yaml
+
 kubectl apply -f k8s/service.yaml
+
 kubectl apply -f k8s/ingress.yaml
 
 7) Map 2048.local to localhost
@@ -148,6 +159,7 @@ docker build -t 2048:1.0 .
 kind load docker-image 2048:1.0 --name kind-2048
 
 kubectl -n game-2048 rollout restart deploy/game-2048
+
 
 
 
