@@ -141,3 +141,4 @@ docker build -t 2048:1.0 .
 kind load docker-image 2048:1.0 --name kind-2048
 kubectl -n game-2048 rollout restart deploy/game-2048
 
+
