@@ -154,7 +154,9 @@ kubectl apply -f k8s/ingress.yaml
 
 sudo cp /etc/hosts /etc/hosts.bak
 
-grep -q '2048\.local' /etc/hosts || echo '127.0.0.1 2048.local' | sudo tee -a /etc/hosts >/dev/null
+grep -q '2048\.test' /etc/hosts || echo '127.0.0.1 2048.test' | sudo tee -a /etc/hosts >/dev/null
+
+sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder || true
 
 
 8) Open the game
@@ -174,6 +176,7 @@ docker build -t 2048:1.0 .
 kind load docker-image 2048:1.0 --name kind-2048
 
 kubectl -n game-2048 rollout restart deploy/game-2048
+
 
 
 
